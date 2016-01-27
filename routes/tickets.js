@@ -7,9 +7,12 @@ function Tickets() {
 }
 
 router.get('/', function(req, res, next) {
+  if(req.cookies.user) {
     Tickets().select().then(function (tickets) {
       res.render('tickets/index', {tickets: tickets});
+
     });
+  }
 });
 
 router.post('/', function(req, res, next) {
