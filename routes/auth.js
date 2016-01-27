@@ -3,11 +3,15 @@ var router = express.Router();
 var bcrypt = require('bcrypt')
 
 router.get('/', function(req, res, next) {
+    if req.cookies.user {
     res.redirect("/tickets");
+  } else {
+    res.render('auth/signin', {button_text: "sign in", notice: "you should sign in"});
+  }
 });
 
 router.get('/signin', function(req, res, next) {
-
+  res.cookies.user("user");
 
       res.render("auth/signin", {button_text: "sign in"});
 
